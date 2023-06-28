@@ -7,8 +7,8 @@ const LoginScreen = ({ navigation }) => {
 
       const handleLogin = () => {
             // Perform login logic here
-            console.log('Username:', username);
-            console.log('Password:', password);
+            console.log('Login Username:', username);
+            console.log('Login Password:', password);
       };
 
       const handleRegister = () => {
