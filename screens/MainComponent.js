@@ -1,17 +1,11 @@
 import LoginScreen from './LoginScreen';
 import RegisterScreen from './RegisterScreen';
+import RegisterGenreScreen from './RegisterGenreScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
 import { View } from 'react-native';
 import Constants from 'expo-constants';
 
 const Drawer = createDrawerNavigator();
-
-const screenOptions = {
-      headerTintColor: '#fff',
-      headerStyle: { backgroundColor: '#0a0908' }
-};
-
 
 
 const Main = () => {
@@ -26,6 +20,8 @@ const Main = () => {
                   <Drawer.Navigator initialRouteName='Home'>
                         <Drawer.Screen name='Login' component={LoginScreen} />
                         <Drawer.Screen name='Register' component={RegisterScreen} />
+                        <Drawer.Screen name='RegisterGenre' component={RegisterGenreScreen}
+                              options={{ title: 'Help Us Help You', drawerLabel: () => null }} />
                   </Drawer.Navigator>
             </View>
       );
