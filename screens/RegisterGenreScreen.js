@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import CheckBox from 'react-native-checkbox';
+import makeAPICall from '../utils/makeAPICall';
+import { apiKey } from '../config';
 
 const RegisterGenreScreen = ({ navigation }) => {
       const [selectedGenres, setSelectedGenres] = useState([]);
+      const [genres, setGenres] = useState([]);
+
+      //const apiUrl = 'http://www.omdbapi.com/';
+      //const endpoint = '/movies';
+      //const url = `${apiUrl}?apikey=${apiKey}&${endpoint}`;
 
       const handleGenreToggle = (genre) => {
             const updatedGenres = selectedGenres.includes(genre)
@@ -13,55 +20,44 @@ const RegisterGenreScreen = ({ navigation }) => {
             setSelectedGenres(updatedGenres);
       };
 
+      const getAllMovieGenres = async () => {
+            try {
+                  const data = await makeAPICall(url);
+                  console.log('Fetched movie data:', data);
+                  const genresSet = new Set();
+
+                  data.forEach((movie) => {
+                        const movieGenres = movie.Genre.split(',').map((genre) => genre.trim());
+                        movieGenres.forEach((genre) => genresSet.add(genre));
+                  });
+
+                  setGenres(Array.from(genresSet));
+            } catch (error) {
+                  console.error('Error occurred while fetching movie genres:', error);
+            }
+      };
+
+
       const handleNext = () => {
-            console.log(selectedGenres)
-      }
+            console.log(selectedGenres);
+      };
+
+      useEffect(() => {
+            getAllMovieGenres();
+      }, []);
 
       return (
             <View>
                   <Text style={styles.heading}>What do you like?</Text>
-                  <View>
-                        <CheckBox
-                              label="Action"
-                              checked={selectedGenres.includes('Action')}
-                              onChange={() => handleGenreToggle('Action')}
-                        />
-                  </View>
-                  <View>
-                        <CheckBox
-                              label="Adventure"
-                              checked={selectedGenres.includes('Adventure')}
-                              onChange={() => handleGenreToggle('Adventure')}
-                        />
-                  </View>
-                  <View>
-                        <CheckBox
-                              label="Animation"
-                              checked={selectedGenres.includes('Animation')}
-                              onChange={() => handleGenreToggle('Animation')}
-                        />
-                  </View>
-                  <View>
-                        <CheckBox
-                              label="Comedy"
-                              checked={selectedGenres.includes('Comedy')}
-                              onChange={() => handleGenreToggle('Comedy')}
-                        />
-                  </View>
-                  <View>
-                        <CheckBox
-                              label="Crime"
-                              checked={selectedGenres.includes('Crime')}
-                              onChange={() => handleGenreToggle('Crime')}
-                        />
-                  </View>
-                  <View>
-                        <CheckBox
-                              label="Drama"
-                              checked={selectedGenres.includes('Drama')}
-                              onChange={() => handleGenreToggle('Drama')}
-                        />
-                  </View>
+                  {genres.map((genre) => (
+                        <View key={genre}>
+                              <CheckBox
+                                    label={genre}
+                                    checked={selectedGenres.includes(genre)}
+                                    onChange={() => handleGenreToggle(genre)}
+                              />
+                        </View>
+                  ))}
                   <Button title="Next" onPress={handleNext} />
             </View>
       );
@@ -69,9 +65,9 @@ const RegisterGenreScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
       heading: {
-        fontSize: 24,
-        fontWeight: 'bold',
+            fontSize: 24,
+            fontWeight: 'bold',
       },
-    });
+});
 
 export default RegisterGenreScreen;
