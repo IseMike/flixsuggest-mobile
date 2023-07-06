@@ -19,7 +19,7 @@ const LoginScreen = ({ navigation }) => {
       };
 
       const handleOMDbLinkPress = () => {
-            Linking.openURL('https://www.omdbapi.com');
+            Linking.openURL('https://rapidapi.com/SAdrian/api/moviesdatabase/details');
       };
 
       const removeLocalData = async () => {
@@ -49,9 +49,13 @@ const LoginScreen = ({ navigation }) => {
                   <Button title="Register" onPress={handleRegister} />
                   <Button title="Remove Local Data" onPress={removeLocalData} />
 
+
+                  <Text style={{ alignSelf: 'center', marginTop: 16, color: 'black' }}>
+                        Created by Isaac Shepherd
+                  </Text>
                   <TouchableOpacity onPress={handleOMDbLinkPress}>
                         <Text style={{ alignSelf: 'center', marginTop: 16, color: 'blue' }}>
-                              Powered by OMDb
+                              Powered by MoviesDatabase
                         </Text>
                   </TouchableOpacity>
             </View>

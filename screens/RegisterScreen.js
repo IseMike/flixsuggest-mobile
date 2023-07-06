@@ -19,7 +19,7 @@ const RegisterScreen = ({ navigation }) => {
                   password: values.password,
                   email: values.email
             }
-            navigation.navigate('RegisterGenre');
+            navigation.navigate('RegLikeGenre');
       };
 
       return (

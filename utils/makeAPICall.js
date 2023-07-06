@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const makeAPICall = async (url) => {
+const makeAPICall = async (url, options) => {
       // Check if data is already available in local storage
       const cachedData = await AsyncStorage.getItem(url);
+      console.log(url)
       console.log(cachedData)
       if (cachedData) {
             console.log('Data already found on local device. API Call not necessary.')
@@ -24,7 +25,7 @@ const makeAPICall = async (url) => {
             }
 
             // Make the API call
-            const response = await fetch(url)
+            const response = await fetch(url, options)
             const data = await response.json()
 
             // Increment the count
@@ -43,5 +44,6 @@ const makeAPICall = async (url) => {
             throw error
       }
 };
+
 
 export default makeAPICall;
