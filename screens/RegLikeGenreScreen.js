@@ -3,17 +3,13 @@ import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
 import CheckBox from 'react-native-checkbox';
 import makeAPICall from '../utils/makeAPICall';
 import config from '../config';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const RegLikeGenreScreen = ({ navigation }) => {
       const [selectedGenres, setSelectedGenres] = useState([]);
       const [genres, setGenres] = useState([]);
 
       const apiKeyMD = config.apiKeyMD
-
-      //const apiUrl = 'http://www.omdbapi.com/';
-      //const endpoint = 'titles/utils/genres';
-      //const apiUrl = `https://moviesdatabase.p.rapidapi.com/`
-      //const url = `${apiUrl}?apikey=${apiKeyMD}&${endpoint}`;
 
 
       const handleGenreToggle = (genre) => {
@@ -49,13 +45,20 @@ const RegLikeGenreScreen = ({ navigation }) => {
             navigation.navigate('RegDislikeGenre', { likedGenres: selectedGenres, genres: genres });
       };
 
+      const handleBack = () => {
+            navigation.goBack();
+      }
+
       useEffect(() => {
             getAllMovieGenres();
       }, []);
 
       return (
             <View style={styles.scrollContainer}>
-                  <Text style={styles.heading}>What do you like?</Text>
+                  <View style={styles.heading}>
+                        <Icon name="arrow-left" size={30} onPress={handleBack} />
+                        <Text style={styles.title}>What do you like?</Text>
+                  </View>
                   <ScrollView >
                         {genres.map((genre) => (
                               <View key={genre}>
@@ -74,9 +77,15 @@ const RegLikeGenreScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
       heading: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 10,
+      },
+      title: {
             fontSize: 24,
             fontWeight: 'bold',
             paddingBottom: 10,
+            paddingLeft: 10
       },
       scrollContainer: {
             flex: 1,
