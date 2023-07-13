@@ -35,7 +35,7 @@ const makeAPICall = async (url, options) => {
 
             // Store the updated count in AsyncStorage
             await AsyncStorage.setItem('apiCallCount', count.toString())
-            // Store the movie data in AsyncStorage
+            // Store the data in AsyncStorage
             await AsyncStorage.setItem(url, JSON.stringify(data))
 
             return data

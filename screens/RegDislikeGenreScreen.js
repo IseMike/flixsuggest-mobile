@@ -17,7 +17,7 @@ const RegDislikeGenreScreen = ({ navigation, route }) => {
       };
 
       const handleNext = () => {
-            // Perform the necessary action with the selected disliked genres and liked genres
+            navigation.navigate('RegRateMovie', { likedGenres: likedGenres, dislikedgenres: selectedGenres });
       };
 
       const handleBack = () => {
