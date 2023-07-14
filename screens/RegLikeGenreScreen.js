@@ -42,7 +42,12 @@ const RegLikeGenreScreen = ({ navigation }) => {
 
       const handleNext = () => {
             console.log(selectedGenres);
-            navigation.navigate('RegDislikeGenre', { likedGenres: selectedGenres, genres: genres });
+            if(selectedGenres.length > 0) {
+                  navigation.navigate('RegDislikeGenre', { likedGenres: selectedGenres, genres: genres });
+            }
+            else {
+                  alert('Please like at least one Genre.')
+            }
       };
 
       const handleBack = () => {

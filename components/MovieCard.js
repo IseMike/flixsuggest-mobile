@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import StarRating from 'react-native-star-rating';
 
 const MovieCard = ({ movie }) => {
+      const [rating, setRating] = useState(0);
+
+      const handleRatingChange = (newRating) => {
+            setRating(newRating);
+      };
+
       return (
             <View style={styles.card}>
                   <View style={styles.imageContainer}>
@@ -14,6 +21,14 @@ const MovieCard = ({ movie }) => {
                   <View style={styles.details}>
                         <Text style={styles.title}>{movie.titleText.text}</Text>
                         <Text style={styles.releaseYear}>{movie.releaseYear.year}</Text>
+                        <StarRating
+                              disabled={false}
+                              maxStars={5}
+                              rating={rating}
+                              selectedStar={handleRatingChange}
+                              starSize={20}
+                              fullStarColor="#FFD700"
+                        />
                   </View>
             </View>
       );
@@ -37,7 +52,7 @@ const styles = StyleSheet.create({
             borderBottomLeftRadius: 8,
             overflow: 'hidden', // Clip content outside the container
             width: '60%',
-          },
+      },
       image: {
             width: '100%',
             height: '85%',
