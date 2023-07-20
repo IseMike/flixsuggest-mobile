@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
-import CheckBox from 'react-native-checkbox';
-import makeAPICall from '../utils/makeAPICall';
-import config from '../config';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useState, useEffect } from 'react'
+import { View, Text, Button, StyleSheet, ScrollView } from 'react-native'
+import CheckBox from 'react-native-checkbox'
+import makeAPICall from '../utils/makeAPICall'
+import config from '../config'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const RegLikeGenreScreen = ({ navigation }) => {
-      const [selectedGenres, setSelectedGenres] = useState([]);
-      const [genres, setGenres] = useState([]);
+      const [selectedGenres, setSelectedGenres] = useState([])
+      const [genres, setGenres] = useState([])
 
       const apiKeyMD = config.apiKeyMD
 
@@ -15,48 +15,48 @@ const RegLikeGenreScreen = ({ navigation }) => {
       const handleGenreToggle = (genre) => {
             const updatedGenres = selectedGenres.includes(genre)
                   ? selectedGenres.filter((item) => item !== genre)
-                  : [...selectedGenres, genre];
+                  : [...selectedGenres, genre]
 
-            setSelectedGenres(updatedGenres);
-      };
+            setSelectedGenres(updatedGenres)
+      }
 
       const getAllMovieGenres = async () => {
-            const url = 'https://moviesdatabase.p.rapidapi.com/titles/utils/genres';
+            const url = 'https://moviesdatabase.p.rapidapi.com/titles/utils/genres'
             const options = {
                   method: 'GET',
                   headers: {
                         'X-RapidAPI-Key': apiKeyMD,
                         'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com',
                   },
-            };
-            try {
-                  const response = await makeAPICall(url, options);
-                  const { results } = response;
-                  const genres = results.filter((genre) => genre !== null);
-                  console.log('Fetched movie genres:', genres);
-                  setGenres(genres);
-            } catch (error) {
-                  console.error('Error occurred while fetching movie genres:', error);
             }
-      };
+            try {
+                  const response = await makeAPICall(url, options)
+                  const { results } = response
+                  const genres = results.filter((genre) => genre !== null)
+                  console.log('Fetched movie genres:', genres)
+                  setGenres(genres)
+            } catch (error) {
+                  console.error('Error occurred while fetching movie genres:', error)
+            }
+      }
 
       const handleNext = () => {
-            console.log(selectedGenres);
+            console.log(selectedGenres)
             if(selectedGenres.length > 0) {
-                  navigation.navigate('RegDislikeGenre', { likedGenres: selectedGenres, genres: genres });
+                  navigation.navigate('RegDislikeGenre', { likedGenres: selectedGenres, genres: genres })
             }
             else {
                   alert('Please like at least one Genre.')
             }
-      };
+      }
 
       const handleBack = () => {
-            navigation.goBack();
+            navigation.goBack()
       }
 
       useEffect(() => {
-            getAllMovieGenres();
-      }, []);
+            getAllMovieGenres()
+      }, [])
 
       return (
             <View style={styles.scrollContainer}>
@@ -77,8 +77,8 @@ const RegLikeGenreScreen = ({ navigation }) => {
                   </ScrollView>
                   <Button title="Next" onPress={handleNext} />
             </View>
-      );
-};
+      )
+}
 
 const styles = StyleSheet.create({
       heading: {
@@ -96,6 +96,6 @@ const styles = StyleSheet.create({
             flex: 1,
             padding: 5
       },
-});
+})
 
-export default RegLikeGenreScreen;
+export default RegLikeGenreScreen

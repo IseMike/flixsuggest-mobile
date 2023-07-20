@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, ScrollView, Modal, TouchableOpacity } from 'react-native';
-import CheckBox from 'react-native-checkbox';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useState } from 'react'
+import { View, Text, Button, StyleSheet, ScrollView, Modal, TouchableOpacity } from 'react-native'
+import CheckBox from 'react-native-checkbox'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const RegDislikeGenreScreen = ({ navigation, route }) => {
-      const [selectedGenres, setSelectedGenres] = useState([]);
-      const { likedGenres, genres } = route.params;
-      const [modalVisible, setModalVisible] = useState(false);
+      const [selectedGenres, setSelectedGenres] = useState([])
+      const { likedGenres, genres } = route.params
+      const [modalVisible, setModalVisible] = useState(false)
 
       const handleGenreToggle = (genre) => {
             const updatedGenres = selectedGenres.includes(genre)
                   ? selectedGenres.filter((item) => item !== genre)
-                  : [...selectedGenres, genre];
+                  : [...selectedGenres, genre]
 
-            setSelectedGenres(updatedGenres);
-      };
+            setSelectedGenres(updatedGenres)
+      }
 
       const handleNext = () => {
-            navigation.navigate('RegRateMovie', { likedGenres: likedGenres, dislikedgenres: selectedGenres });
-      };
+            navigation.navigate('RegRateMovie', { likedGenres: likedGenres, dislikedgenres: selectedGenres })
+      }
 
       const handleBack = () => {
-            navigation.goBack();
+            navigation.goBack()
       }
 
       const handleConfirm = () => {
@@ -29,11 +29,11 @@ const RegDislikeGenreScreen = ({ navigation, route }) => {
       }
 
       const handleCloseModal = () => {
-            setModalVisible(false);
-      };
+            setModalVisible(false)
+      }
 
       // Filter out the liked genres from the list of genres
-      const filteredGenres = genres.filter((genre) => !likedGenres.includes(genre));
+      const filteredGenres = genres.filter((genre) => !likedGenres.includes(genre))
 
       return (
             <View style={styles.scrollContainer}>
@@ -69,8 +69,8 @@ const RegDislikeGenreScreen = ({ navigation, route }) => {
             </View>
 
 
-      );
-};
+      )
+}
 
 const styles = StyleSheet.create({
       heading: {
@@ -109,6 +109,6 @@ const styles = StyleSheet.create({
             fontWeight: 'bold',
             marginTop: 10,
       },
-});
+})
 
-export default RegDislikeGenreScreen;
+export default RegDislikeGenreScreen

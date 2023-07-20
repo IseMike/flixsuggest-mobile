@@ -1,8 +1,8 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const makeAPICall = async (url, options) => {
       // Check if data is already available in local storage
-      const cachedData = await AsyncStorage.getItem(url);
+      const cachedData = await AsyncStorage.getItem(url)
       console.log(url)
       console.log(cachedData)
       if (cachedData) {
@@ -21,7 +21,7 @@ const makeAPICall = async (url, options) => {
             // Check if the count exceeds the limit
             if (count >= 1000) {
                   console.error('API call daily limit exceeded')
-                  return; // Stop further API calls
+                  return // Stop further API calls
             }
 
             // Make the API call
@@ -43,7 +43,7 @@ const makeAPICall = async (url, options) => {
             console.error('Error:', error)
             throw error
       }
-};
+}
 
 
-export default makeAPICall;
+export default makeAPICall

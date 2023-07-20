@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import StarRating from 'react-native-star-rating';
+import React, { useState } from 'react'
+import { View, Text, Image, StyleSheet } from 'react-native'
+import StarRating from 'react-native-star-rating'
 
 const MovieCard = ({ movie }) => {
-      const [rating, setRating] = useState(0);
+      const [rating, setRating] = useState(0)
 
       const handleRatingChange = (newRating) => {
-            setRating(newRating);
-      };
+            setRating(newRating)
+      }
 
       return (
             <View style={styles.card}>
@@ -31,8 +31,8 @@ const MovieCard = ({ movie }) => {
                         />
                   </View>
             </View>
-      );
-};
+      )
+}
 
 const styles = StyleSheet.create({
       card: {
@@ -70,6 +70,6 @@ const styles = StyleSheet.create({
             fontSize: 14,
             color: '#888',
       },
-});
+})
 
-export default MovieCard;
+export default MovieCard

@@ -1,26 +1,26 @@
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
-import { Formik } from 'formik';
-import { validateUserRegisterForm } from '../utils/validateUserRegisterForm';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native'
+import { Formik } from 'formik'
+import { validateUserRegisterForm } from '../utils/validateUserRegisterForm'
 
 const styles = StyleSheet.create({
       errorText: {
         color: 'red'
       }
-    });
+    })
 
 
 const RegisterScreen = ({ navigation }) => {
       const handleRegister = (values) => {
-            console.log('Register Username:', values.username);
-            console.log('Register Password:', values.password);
-            console.log('Register Email:', values.email);
+            console.log('Register Username:', values.username)
+            console.log('Register Password:', values.password)
+            console.log('Register Email:', values.email)
             const userInfo = {
                   username: values.username,
                   password: values.password,
                   email: values.email
             }
-            navigation.navigate('RegLikeGenre');
-      };
+            navigation.navigate('RegLikeGenre')
+      }
 
       return (
             <Formik
@@ -60,7 +60,7 @@ const RegisterScreen = ({ navigation }) => {
                         </View>
                   )}
             </Formik>
-      );
-};
+      )
+}
 
-export default RegisterScreen;
+export default RegisterScreen
