@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import StarRating from 'react-native-star-rating'
+import placeholderImage from '../assets/placeholder.png'
 
 const MovieCard = ({ movie }) => {
       const [rating, setRating] = useState(0)
@@ -9,17 +10,18 @@ const MovieCard = ({ movie }) => {
             setRating(newRating)
       }
 
+
       return (
             <View style={styles.card}>
                   <View style={styles.imageContainer}>
                         <Image
-                              source={{ uri: movie.primaryImage.url }}
+                              source={movie.primaryImage?.url ? { uri: movie.primaryImage.url } : placeholderImage}
                               style={styles.image}
                               resizeMode="cover"
                         />
                   </View>
                   <View style={styles.details}>
-                        <Text style={styles.title}>{movie.titleText.text}</Text>
+                        <Text style={styles.title}>{movie.originalTitleText.text}</Text>
                         <Text style={styles.releaseYear}>{movie.releaseYear.year}</Text>
                         <StarRating
                               disabled={false}

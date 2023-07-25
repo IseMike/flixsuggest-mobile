@@ -26,7 +26,6 @@ const RegRateMoviesScreen = ({ route }) => {
             try {
                   const response = await makeAPICall(url, options)
                   const { results } = response
-                  console.log('Fetched movies:', results)
                   return results
             } catch (error) {
                   console.error('Error occurred while fetching movies:', error)
@@ -47,8 +46,6 @@ const RegRateMoviesScreen = ({ route }) => {
             fetchMovies()
       }, [])
 
-      console.log(likedGenres)
-      console.log(moviesByGenre)
 
       return (
             <View style={{ flex: 1 }}>

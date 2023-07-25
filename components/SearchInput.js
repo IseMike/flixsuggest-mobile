@@ -1,12 +1,38 @@
 import React, { useState } from 'react'
 import { View, TextInput, TouchableOpacity, StyleSheet, Text } from 'react-native'
+import config from '../config'
+import makeAPICall from '../utils/makeAPICall'
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
       const [searchText, setSearchText] = useState('')
+      const apiKeyMD = config.apiKeyMD
 
-      const handleSearch = () => {
-            // Perform the search action with the searchText
-            console.log('Performing search with query:', searchText)
+      const handleSearch = async () => {
+            if (searchText.trim() === '') {
+                  Alert.alert('Error', 'Please enter a search term.')
+                  return
+            }
+
+            const encodedSearchTerm = encodeURIComponent(searchText)
+
+            const url = `https://moviesdatabase.p.rapidapi.com/titles/search/title/${encodedSearchTerm}?exact=false&sort=year.incr&endYear=2022&titleType=movie`
+            const options = {
+                  method: 'GET',
+                  headers: {
+                        'X-RapidAPI-Key': apiKeyMD,
+                        'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com',
+                  },
+            }
+            try {
+                  const response = await makeAPICall(url, options)
+                  const { results } = response
+                  // Call the onSearch callback with the searchText
+                  onSearch(results)
+            } catch (error) {
+                  console.error('Error occurred while fetching movies:', error)
+            }
+
+
             // Clear the input after searching
             setSearchText('')
       }
